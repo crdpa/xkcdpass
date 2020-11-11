@@ -29,11 +29,11 @@ elif sys.argv[1] == "br":
         words = {}
         for line in txt_file:
             key = line.strip('\n')
-            # check if the word has hyphen, if yes, discard it or else
-            # the password gets too big
-            # checa se a palavra contém hífen, caso sim, descarte senão
-            # a senha fica muito grande
-            if '-' not in key:
+            # check if the word has less than 4 characters
+            # or hyphen, if yes, discard it
+            # checa se a palavra contém menos de 4 caracters
+            # ou hífen, caso sim, descarte
+            if '-' not in key and len(key) > 3:
                 words[key] = 1
             else:
                 continue
