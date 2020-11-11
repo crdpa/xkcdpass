@@ -8,6 +8,7 @@
 import json, random
 
 word = []
+sep = '-'
 
 with open('words_dictionary.json') as json_file:
     words = json.load(json_file)
@@ -16,4 +17,4 @@ with open('words_dictionary.json') as json_file:
         word.append(random.choice(list(words)))
         words.pop(word[x])
 
-print('-'.join(word))
+print(sep.join(word))
