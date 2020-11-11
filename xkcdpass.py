@@ -20,7 +20,7 @@ if len(sys.argv) != 2:
     exit()
 
 def createDict(fname):
-    for line in f:
+    for line in fname:
         key = line.strip('\n')
         # check if the word has less than 4 characters
         # and hyphen, if yes, discard it
