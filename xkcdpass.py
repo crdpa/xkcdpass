@@ -10,11 +10,8 @@ import json, random, sys
 word = []
 sep = '-'
 help = '''Usage:
-xkcdpass.py br
-xkcdpass.py en
-
-br: brazilian portuguese
-en: english
+xkcdpass.py br (brazilian portuguese)
+xkcdpass.py en (english)
 '''
 
 if len(sys.argv) != 2:
@@ -30,14 +27,13 @@ elif sys.argv[1] == "br":
         for line in txt_file:
             key = line.strip('\n')
             # check if the word has less than 4 characters
-            # or hyphen, if yes, discard it
+            # and hyphen, if yes, discard it
             # checa se a palavra contém menos de 4 caracters
-            # ou hífen, caso sim, descarte
+            # e hífen, caso sim, descarte
             if '-' not in key and len(key) > 3:
                 words[key] = 1
             else:
                 continue
-
 else:
     print(help)
     quit()
