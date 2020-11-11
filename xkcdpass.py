@@ -30,6 +30,10 @@ def createDict(fname):
             allWords[key] = 1
         else:
             continue
+    for x in range(0, 4):
+         word.append(random.choice(list(allWords)))
+         allWords.pop(word[x])
+    return
 
 if sys.argv[1] == "en": 
     with open('words.txt') as f:
@@ -41,9 +45,4 @@ else:
     print(help)
     quit()
 
-for x in range(0, 4):
-     word.append(random.choice(list(allWords)))
-     allWords.pop(word[x])
-
 print(sep.join(word))
-
