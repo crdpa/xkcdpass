@@ -7,13 +7,13 @@
 
 import json, random
 
-word = ['', '', '', '']
+word = []
 
 with open('words_dictionary.json') as json_file:
     words = json.load(json_file)
 
     for x in range(0, 4):
-        word[x] = random.choice(list(words))
+        word.append(random.choice(list(words)))
         words.pop(word[x])
 
 print('-'.join(word))
