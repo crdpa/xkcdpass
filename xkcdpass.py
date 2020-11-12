@@ -5,7 +5,7 @@
 # xkcdpass.py
 # password generator based on xkcd 936 web comic
 
-import random
+import secrets
 import sys
 
 word = []
@@ -22,6 +22,7 @@ if len(sys.argv) != 2:
 
 
 def createDict(fname):
+    i = v = 0
     for line in fname:
         key = line.strip('\n')
         # check if the word has less than 4 characters
@@ -29,12 +30,14 @@ def createDict(fname):
         # checa se a palavra contém menos de 4 caracters
         # e hífen, caso sim, descarte
         if '-' not in key and len(key) > 3:
-            allWords[key] = 1
+            allWords[i] = key
+            i += 1
         else:
             continue
     for x in range(0, 4):
-        word.append(random.choice(list(allWords)))
-        allWords.pop(word[x])
+        v = secrets.randbelow(i)
+        word.append(allWords[v])
+        allWords.pop(v)
     return
 
 
