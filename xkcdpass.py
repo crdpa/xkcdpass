@@ -8,7 +8,7 @@
 import secrets
 import sys
 
-word = []
+password = []
 allWords = {}
 sep = '-'
 help = '''Usage:
@@ -42,10 +42,10 @@ def createDict(fname):
         # gere outro número  aleatório
         if k in allWords and x != 0:
             k = secrets.randbelow(i)
-            word.append(allWords[k])
+            password.append(allWords[k])
             allWords.pop(k)
         else:
-            word.append(allWords[k])
+            password.append(allWords[k])
             allWords.pop(k)
     return
 
@@ -60,4 +60,4 @@ else:
     print(help)
     quit()
 
-print(sep.join(word))
+print(sep.join(password))
