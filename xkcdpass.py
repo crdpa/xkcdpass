@@ -36,14 +36,10 @@ def createDict(fname):
             continue
     for x in range(0, 4):
         k = secrets.randbelow(i)
-        # if key is in dictionary and it's not the first loop,
-        # regenerate the random number
-        # se chave está no dicionário e não é o primeiro loop,
-        # gere outro número  aleatório
-        if k in allWords and x != 0:
+        # if key is not in dictionary, regenerate the random number
+        # se chave não está no dicionário, gere outro número aleatório
+        while k not in allWords:
             k = secrets.randbelow(i)
-            password.append(allWords[k])
-            allWords.pop(k)
         else:
             password.append(allWords[k])
             allWords.pop(k)
