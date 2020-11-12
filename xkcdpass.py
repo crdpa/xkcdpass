@@ -1,11 +1,12 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 #  _  _ _|  _   _
 # (_ | (_| |_) (_|
 #          |
 # xkcdpass.py
 # password generator based on xkcd 936 web comic
 
-import random, sys
+import random
+import sys
 
 word = []
 allWords = {}
@@ -19,6 +20,7 @@ if len(sys.argv) != 2:
     print(help)
     exit()
 
+
 def createDict(fname):
     for line in fname:
         key = line.strip('\n')
@@ -31,11 +33,12 @@ def createDict(fname):
         else:
             continue
     for x in range(0, 4):
-         word.append(random.choice(list(allWords)))
-         allWords.pop(word[x])
+        word.append(random.choice(list(allWords)))
+        allWords.pop(word[x])
     return
 
-if sys.argv[1] == "en": 
+
+if sys.argv[1] == "en":
     with open('words.txt') as f:
         createDict(f)
 elif sys.argv[1] == "br":
