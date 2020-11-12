@@ -22,7 +22,7 @@ if len(sys.argv) != 2:
 
 
 def createDict(fname):
-    i = v = 0
+    i = k = 0
     for line in fname:
         key = line.strip('\n')
         # check if the word has less than 4 characters
@@ -35,9 +35,18 @@ def createDict(fname):
         else:
             continue
     for x in range(0, 4):
-        v = secrets.randbelow(i)
-        word.append(allWords[v])
-        allWords.pop(v)
+        k = secrets.randbelow(i)
+        # if key is in dictionary and it's not the first loop,
+        # regenerate the random number
+        # se chave está no dicionário e não é o primeiro loop,
+        # gere outro número  aleatório
+        if k in allWords and x != 0:
+            k = secrets.randbelow(i)
+            word.append(allWords[k])
+            allWords.pop(k)
+        else:
+            word.append(allWords[k])
+            allWords.pop(k)
     return
 
 
