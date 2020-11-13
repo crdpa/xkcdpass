@@ -8,52 +8,54 @@
 import secrets
 import sys
 
-password = []
-allWords = {}
-sep = '-'
-help = '''Usage:
-xkcdpass.py br (brazilian portuguese)
-xkcdpass.py en (english)
-'''
 
-if len(sys.argv) != 2:
-    print(help)
-    exit()
+def create_word_list(filename):
+    word_list = []
 
+    with open(filename) as f:
+        for line in f:
+            word = line.strip('\n')
 
-def createDict(fname):
-    i = k = 0
-    for line in fname:
-        key = line.strip('\n')
-        # check if the word has less than 4 characters
-        # and hyphen, if yes, discard it
-        # checa se a palavra contém menos de 4 caracters
-        # e hífen, caso sim, descarte
-        if '-' not in key and len(key) > 3:
-            allWords[i] = key
-            i += 1
-        else:
-            continue
-    for x in range(0, 4):
-        k = secrets.randbelow(i)
-        # if key is not in dictionary, regenerate the random number
-        # se chave não está no dicionário, gere outro número aleatório
-        while k not in allWords:
-            k = secrets.randbelow(i)
-        else:
-            password.append(allWords[k])
-            allWords.pop(k)
-    return
+            if '-' not in word and len(word) >= 4:
+                word_list.append(word)
+
+    return word_list
 
 
-if sys.argv[1] == "en":
-    with open('words.txt') as f:
-        createDict(f)
-elif sys.argv[1] == "br":
-    with open('palavras.txt') as f:
-        createDict(f)
-else:
-    print(help)
-    quit()
+def generate_password(word_list, num_words=4, sep="-"):
+    words = []
 
-print(sep.join(password))
+    for _ in range(num_words):
+        random_word = secrets.choice(word_list)
+
+        # if the word is already chosen, choose another
+        while random_word in words:
+            random_word = secrets.choice(word_list)
+
+        words.append(random_word)
+
+    return sep.join(words)
+
+
+def main():
+    words_filename = {
+        "br": "palavras.txt",
+        "en": "words.txt",
+    }
+
+    if len(sys.argv) != 2 or sys.argv[1] not in words_filename:
+        script_name = sys.argv[0]
+        print(f"""Usage:
+            {script_name} br (brazilian portuguese)
+            {script_name} en (english)
+        """)
+        exit()
+
+    word_list = create_word_list(words_filename[sys.argv[1]])
+    password = generate_password(word_list)
+
+    print(password)
+
+
+if __name__ == "__main__":
+    main()
