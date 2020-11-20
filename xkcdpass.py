@@ -14,9 +14,9 @@ def create_word_list(filename):
 
     with open(filename) as f:
         for line in f:
-            word = line.strip('\n')
+            word = line.strip()
 
-            if '-' not in word and len(word) >= 4:
+            if "-" not in word and len(word) >= 4:
                 word_list.append(word)
 
     return word_list
